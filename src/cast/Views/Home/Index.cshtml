@@ -1,0 +1,42 @@
+<!-- Header -->
+<header>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <img class="img-responsive img-circle" src="img/all_the_things.jpg" alt="">
+                <div class="intro-text">
+                    <span class="name">Vote</span>
+                    <hr class="star-light">
+                    <span class="skills">For the things</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Portfolio Grid Section -->
+<section id="portfolio">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2>The Things</h2>
+                <hr class="star-primary">
+            </div>
+        </div>
+        <div class="row">
+            @foreach(var candidate in Model.Candidates)
+            {
+                <div class="col-sm-4 portfolio-item">
+                    <a href="" onclick="return false;" class="portfolio-link" data-id="@candidate.Id">
+                        <div class="caption">
+                            <div class="caption-content">
+                                <i class="fa fa-check fa-3x" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <img src="@candidate.ImgPath" class="img-responsive" alt="">
+                    </a>
+                </div>
+            }
+        </div>
+    </div>
+</section>

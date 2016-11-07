@@ -1,0 +1,39 @@
+version: '2.0'
+services:
+
+    postgres:
+        image: postgres:latest
+        ports: 
+            - 5432:5432
+
+    queue:
+        image: rabbitmq:3-management
+        ports:
+            - 8080:15672
+
+    cast:
+        build: ./src/cast
+        links:
+            - queue
+
+    results:
+        build: ./src/results
+        links:
+            - postgres
+
+    worker:
+        build: ./src/worker
+        restart: always
+        links:
+            - queue
+            - postgres
+
+    proxy:
+        image: httpd:latest
+        volumes:
+            - ./src/proxy/httpd.default.conf:/usr/local/apache2/conf/httpd.conf
+        links:
+            - cast
+            - results
+        ports:
+            - 80:80
